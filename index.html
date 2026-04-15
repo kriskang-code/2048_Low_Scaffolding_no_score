@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Classic 2048 layout with power-ups.">
+    <title>2048</title>
+
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="style/main.css">
+</head>
+
+<body>
+    <main class="app">
+        <header class="hero">
+            <h1 class="title">2048</h1>
+            <p class="subtitle">Join the numbers and get to the <strong>2048 tile!</strong></p>
+        </header>
+
+        <section class="score-row" aria-label="Scoreboard">
+            <div class="score-card">
+                <span class="score-label">SCORE</span>
+                <span class="score-value">0</span>
+            </div>
+            <div class="score-card">
+                <span class="score-label">BEST</span>
+                <span class="best-value">0</span>
+            </div>
+        </section>
+
+        <section class="board-shell" aria-label="2048 grid">
+            <div class="grid-container" aria-hidden="true">
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+            </div>
+
+            <div class="tile-container"></div>
+            <div class="swap-hint" aria-live="polite"></div>
+
+            <div class="game-message" aria-live="polite">
+                <p class="game-message-text"></p>
+                <button class="retry-button" type="button">Try Again</button>
+            </div>
+        </section>
+
+        <div class="controls-row">
+            <button class="undo-button" type="button" title="Undo last move">
+                Undo <span class="undo-count">2</span>
+            </button>
+            <button class="exchange-button" type="button" title="Exchange two tiles (X)">
+                Swap <span class="exchange-count">2</span>
+            </button>
+            <button class="remove-button" type="button" title="Remove a tile (B)">
+                Remove <span class="remove-count">2</span>
+            </button>
+            <button class="new-game-button" type="button">New Game</button>
+        </div>
+    </main>
+
+    <script>
+        (function () {
+            if (typeof window.LocalStorageManager !== "undefined") return;
+
+            function LocalStorageManager() {
+                this.bestScoreKey = "bestScore";
+            }
+
+            LocalStorageManager.prototype.getBestScore = function () {
+                var value = 0;
+                try {
+                    value = parseInt(window.localStorage.getItem(this.bestScoreKey), 10);
+                } catch (e) {
+                    value = 0;
+                }
+                return isNaN(value) ? 0 : value;
+            };
+
+            LocalStorageManager.prototype.setBestScore = function (score) {
+                try {
+                    window.localStorage.setItem(this.bestScoreKey, String(score));
+                } catch (e) {
+                }
+            };
+
+            window.LocalStorageManager = LocalStorageManager;
+        }());
+    </script>
+
+    <script src="js/tile.js"></script>
+    <script src="js/grid.js"></script>
+    <script src="js/input_manager.js"></script>
+    <script src="js/html_actuator.js"></script>
+    <script src="js/game_manager.js"></script>
+    <script src="js/application.js"></script>
+</body>
+</html>
