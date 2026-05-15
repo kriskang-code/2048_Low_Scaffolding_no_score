@@ -11,26 +11,47 @@
     <link rel="stylesheet" href="style/main.css">
 
     <style>
+        .hero-top {
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            gap: 24px;
+        }
+
         .time-display {
-            margin-top: 10px;
+            margin-bottom: 14px;
             font-size: 16px;
             font-weight: bold;
             color: #776e65;
-            text-align: center;
+            white-space: nowrap;
+        }
+
+        @media screen and (max-width: 520px) {
+            .hero-top {
+                gap: 12px;
+            }
+
+            .time-display {
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
         }
     </style>
-    
 </head>
 
 <body>
     <main class="app">
         <header class="hero">
-            <h1 class="title">2048</h1>
-            <p class="subtitle">Join the numbers and get to the <strong>2048 tile!</strong></p>
-            <!-- Real-time clock -->
-            <div class="time-display">
-                现在时间: <span id="clock">--:--:--</span>
+            <div class="hero-top">
+                <h1 class="title">2048</h1>
+
+                <!-- Real-time clock beside 2048 logo -->
+                <div class="time-display">
+                    现在时间: <span id="clock">--:--:--</span>
+                </div>
             </div>
+
+            <p class="subtitle">Join the numbers and get to the <strong>2048 tile!</strong></p>
         </header>
 
         <section class="board-shell" aria-label="2048 grid">
@@ -111,6 +132,7 @@
     <script src="js/html_actuator.js"></script>
     <script src="js/game_manager.js"></script>
     <script src="js/application.js"></script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
 
@@ -132,5 +154,5 @@
         });
     </script>
 </body>
-</html>
 
+</html>
