@@ -111,25 +111,26 @@
     <script src="js/html_actuator.js"></script>
     <script src="js/game_manager.js"></script>
     <script src="js/application.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            function updateClock() {
+                const clockEl = document.getElementById("clock");
+                if (!clockEl) return;
+
+                clockEl.textContent = new Date().toLocaleTimeString("en-GB", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                    hour12: false
+                });
+            }
+
+            updateClock();
+            setInterval(updateClock, 1000);
+
+        });
+    </script>
 </body>
 </html>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
 
-        function updateClock() {
-            const clockEl = document.getElementById("clock");
-            if (!clockEl) return;
-
-            clockEl.textContent = new Date().toLocaleTimeString("en-GB", {
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-                hour12: false
-            });
-        }
-
-        updateClock();
-        setInterval(updateClock, 1000);
-
-    });
-</script>
